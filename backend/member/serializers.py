@@ -16,9 +16,6 @@ class MemberSerializers(serializers.Serializer): # vo의 엔티티값들을 직�
         return Member.objects.create(**validated_data)
 
     def update(self, instance, validated_data):
-        instance.username = validated_data.get('username', instance.username)
-        instance.password = validated_data.get('password', instance.password)
-        instance.name = validated_data.get('name', instance.name)
-        instance.email = validated_data.get('email', instance.email)
+        Member.objects.filter(pk=instance.username).update(**validated_data)
         return instance
 

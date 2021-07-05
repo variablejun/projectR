@@ -20,7 +20,9 @@ export const itemRetrieve = body => axios.post(`${SERVER}item/retrieve`,{headers
 export const memberDetail = body => axios.post(`${SERVER}api/member/detail`,{headers, body})
 export const memberDelete = body => axios.delete(`${SERVER}api/member/delete`,{headers, body})
 export const memberList = () => axios.get(`${SERVER}adm/member/list`) // return이 있는 함수 이다. 값을 받아 멤버리스트에 넣어주고 그걸 ml에 부려준다 함수이름은 곧 함수의 리턴값을 나타낸다. 
-export const memberModify = body => axios.post(`${SERVER}api/member/modify`,{headers, body})
+// LIst는 값을 바로 받아와얗 하기때문에 비워놓는다. 전선처럼 항상 연결되어있지만 이벤트를 작동시키지 않으면 작동하지 않음(이벤트 드리븐)
+//
+export const memberModify = body => axios.put(`${SERVER}api/member/modify`,{headers, body})
 export const memberRegister = body => axios.post(`${SERVER}api/member/register`,{headers, body})
 export const memberRetrieve = body => axios.post(`${SERVER}adm/member/retrieve`,{headers, body})
 export const memberLogin = body => axios.post(`${SERVER}api/member/login`,{headers, body}) // 값을 보내가도 하고 받기도 한다 서로 함수로써 연결되어있다. 함수
