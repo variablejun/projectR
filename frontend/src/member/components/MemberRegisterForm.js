@@ -1,6 +1,6 @@
 import React,{useState} from 'react'
 //import './Signup.css'
-import { memberRegister, memberLogin} from 'api'
+import { memberRegister} from 'api'
 import { Button } from '@material-ui/core';
 import{ useHistory} from 'react-router'
 
@@ -15,7 +15,7 @@ const MemberRegister = () => {
 
 
   })
-  const {username, password, name, email} = 'userInfo' /*구조분해할당*/ 
+  const {username, password, name, email} = 'memeberInfo' /*구조분해할당*/ 
 
   const handleChange = e =>{
     const {name, value} = e.target
@@ -33,7 +33,7 @@ const MemberRegister = () => {
       }
       return response;
     }
-    alert(`전송 클릭: ${JSON.stringify({...memberInfo})}`)
+    alert(`전송 클릭: ${JSON.stringify({...memberInfo})}`)  // json을 스트링으로 출력해주기위해 stringify
     memberRegister({...memberInfo})
     .then(res => {
       alert(`회원가입 완료 : ${res.data.result}`)
@@ -42,11 +42,7 @@ const MemberRegister = () => {
     .catch(err =>{
       alert(`회원가입 실패 : ${err}`)
     }) //실패
-    
-    const loginRequest = {...memberInfo}
-    memberLogin(loginRequest) // Promise 코딩패턴
-    .then()
-    .catch()
+  
   } 
 
   const handleClick = e =>{ // click 여러개 데이터를 결합하여 전송할때

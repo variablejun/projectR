@@ -1,31 +1,41 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { useHistory } from 'react-router'
 //리턴이 있지만 생략
 // 여기에 선언되있어서 2번나옴 그래서 home에 있는 nav태그를 지운다
-export const MemberMenu = () => (
-<nav> 
-    {
-        localStorage.getItem("loginedMember") === ''?//세션스토리지(브라우저 닫으면 자동으로 제거됨)와 로컬스토리지(수동으로제거해야함 -> 로그아웃)
+//세션스토리지(브라우저 닫으면 자동으로 제거됨)와 로컬스토리지(수동으로제거해야함 -> 로그아웃)
         
-        <ol>
-            <li><Link to = '/member-login'>회원로그인</Link></li>
-            <li><Link to = '/member-register'>회원가입</Link></li>
-        </ol>
-        :
-        <ol>
-            <li><Link to='/member-list'>회원목록보기</Link></li>
-            <li><Link to='/member-retrive'>회원이름조회</Link></li>
-            <li><Link to='/member-detail'>회원정보상세</Link></li>
-            <li><Link to='/member-modify'>회원정보수정</Link></li>
-            <li><Link to='/member-delete'>회원정보삭제</Link></li>
-            <li><Link to='/member-logout' onClick={() => localStorage.setItem("loginedMember","")}>
-                
-                로그아웃</Link></li>
-        </ol>
-     }   
-</nav>
-
-)
+export const MemberMenu = () => { 
+    
+    const history = useHistory()
+    
+    return ( <nav>
+       
+            
+            {
+                localStorage.getItem("loginedMember") === '' ?
+                <ol>
+                    <li><Link to='/member-login'>회원로그인</Link></li>
+                    <li><Link to='/member-register'>회원등록</Link></li>
+                </ol>
+                :
+                <ol>
+                    <li><Link to='/member-list'>회원목록</Link></li>
+                    <li><Link to='/member-retreive'>회원이름조회</Link></li>
+                    <li><Link to='/member-detail'>회원상세</Link></li>
+                    <li><Link to='/member-modify'>회원수정</Link></li>
+                    <li><Link to='/member-delete'>회원탈퇴</Link></li>
+                    <li><Link to='/member-logout' onClick={() => {
+                        localStorage.setItem("loginedMember","")
+                        history.push("/home")
+                        }}>로그아웃</Link></li>
+                </ol>
+            }
+            
+       
+        </nav>
+)   
+    }
 export const ItemMenu = () => (<nav>
     <ol>
         <li><Link to='/item-list'>아이템 목록</Link></li>

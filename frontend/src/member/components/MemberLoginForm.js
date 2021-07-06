@@ -1,5 +1,5 @@
 import React,{useState} from 'react'
-//import '../styles/MemberLogin.css'
+import '../styles/MemberLogin.css'
 import { memberLogin } from 'api'
 import { useHistory } from 'react-router'
 
@@ -17,13 +17,16 @@ const MemberLoginForm = () => {
       e.preventDefault()
       memberLogin({...loginRequest})
       .then(res => {
-        if(res.data.result === 'PASSWORD-FAIL'){
+        if(res.data.result === 'PASSWORD-FAIL'){  // res == return JsonResponse({'result':'PASSWORD-FAIL'}, status=201)
           alert(`비밀번호가 틀립니다.`)
           document.getElementById("username").value = ""
           document.getElementById("password").value = ""
   
         }else if(res.data.result === 'USERNAME-FAIL'){
           alert(`아이디가 틀립니다.`)
+          document.getElementById("username").value = ""
+          document.getElementById("password").value = ""
+
         }else{
           alert(`로그인 성공 `) // `` '' 조심
           localStorage.setItem("loginedMember", JSON.stringify(res.data))
